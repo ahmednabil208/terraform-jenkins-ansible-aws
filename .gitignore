@@ -5,3 +5,5 @@ IAM_user_keys.txt
 key.pem
 
 terraform/.terraform*
+
+terraform*
