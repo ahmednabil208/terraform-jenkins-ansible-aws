@@ -2,8 +2,8 @@
 resource "aws_instance" "bastion" {
   ami                         = var.ami
   instance_type               = var.instance_type
-  vpc_security_group_ids      = [module.network.public_sg]
-  subnet_id                   = module.network.public_subnet
+  vpc_security_group_ids      = [aws_security_group.public_sg.id]
+  subnet_id                   = module.network.public_subnet_id
   associate_public_ip_address = true
   key_name                    = aws_key_pair.ssh_key.key_name
 
@@ -15,10 +15,12 @@ resource "aws_instance" "bastion" {
     delete_on_termination = true
   }
 
-  # Task in lab to print ip of bastion ec2
+
   provisioner "local-exec" {
     command = "echo ${aws_instance.bastion.public_ip}"
   }
+
+
 }
 
 
@@ -27,11 +29,11 @@ resource "aws_instance" "bastion" {
 
 # application ec2
 resource "aws_instance" "application" {
-  ami                         = var.ami
-  instance_type               = var.instance_type
-  vpc_security_group_ids      = [module.network.private_sg]
-  subnet_id                   = module.network.private_subnet
-  key_name                    = aws_key_pair.ssh_key.key_name
+  ami                    = var.ami
+  instance_type          = var.instance_type
+  vpc_security_group_ids = [aws_security_group.private_sg.id]
+  subnet_id              = module.network.private_subnet_id
+  key_name               = aws_key_pair.ssh_key.key_name
 
   tags = {
     Name = "application"

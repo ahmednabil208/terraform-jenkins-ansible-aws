@@ -6,4 +6,4 @@ key.pem
 
 terraform/.terraform*
 
-terraform*
+terraform.tfstate
