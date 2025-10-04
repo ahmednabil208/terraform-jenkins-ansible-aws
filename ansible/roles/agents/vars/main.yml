@@ -1,2 +1,9 @@
 ---
 # vars file for roles/role1
+    docker_deps:
+      - apt-transport-https 
+      - curl
+    docker_engine:
+      - docker-ce 
+      - docker-ce-cli 
+      - containerd.io 
