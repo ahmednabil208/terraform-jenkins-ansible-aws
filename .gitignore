@@ -7,3 +7,5 @@ key.pem
 terraform/.terraform*
 
 terraform.tfstate
+
+steps.md
