@@ -3,5 +3,5 @@
   hosts: private_ec2s
   gather_facts: yes
   roles:
-    roles/agents 
+    - role: roles/agents 
     
