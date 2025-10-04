@@ -1,0 +1,32 @@
+pipeline{
+    agent{
+        label "private_ec2"
+    } 
+
+    stages{
+        stage('Checkout repo'){
+            steps{
+                git url: "https://github.com/ahmednabil208/jenkins_nodejs_example2.git", branch: "rds_redis", changelog: false, poll: false
+            }
+        }
+        stage('Build and push image'){
+            steps{
+                               
+                 withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'username', passwordVariable: "password")]) {
+                    sh  """
+                        echo $password | docker login -u $username --password-stdin
+                        docker build -t ahmednabil20/nodejs_app_img:lts -f dockerfile .
+                        docker push ahmednabil20/nodejs_app_img:lts
+                    """
+                 }
+            }
+        }
+        stage('Run the container'){
+            steps{
+                sh 'docker stop nodejs_app || true'
+                sh 'docker rm -f nodejs_app || true'
+                sh 'docker run -d -p 3000:3000 --name nodejs_app ahmednabil20/nodejs_app_img:lts'
+            }
+        }
+    }
+}
