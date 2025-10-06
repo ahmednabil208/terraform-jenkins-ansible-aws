@@ -26,7 +26,8 @@ pipeline{
             steps{
                 sh 'docker stop nodejs_app || true'
                 sh 'docker rm -f nodejs_app || true'
-                sh 'docker run -d -p 3000:3000 --name nodejs_app ahmednabil20/nodejs_app_img:lts'
+               sh "docker run --name myapp -d -e RDS_HOSTNAME=terraform-20251006105558149500000006.cwnwikig2nj0.us-east-1.rds.amazonaws.com -e RDS_USERNAME=admin -e RDS_PASSWORD=password123 -e RDS_PORT=3306 -p 3000:3000 ahmednabil20/nodejs_app_img:lts"
+   
             }
         }
     }
