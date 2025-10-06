@@ -7,6 +7,7 @@ pipeline{
         stage('Checkout repo'){
             steps{
                 git url: "https://github.com/ahmednabil208/jenkins_nodejs_example2.git", branch: "rds_redis", changelog: false, poll: false
+                sh ' ls '
             }
         }
         stage('Build and push image'){
