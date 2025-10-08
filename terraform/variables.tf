@@ -36,61 +36,61 @@ variable "aws_region" {
 # RDS Variables
 
 variable "db_name" {
-  type = string
+  type    = string
   default = "mydb"
 }
 
 variable "rds_engine" {
-  type = string
+  type    = string
   default = "mysql"
 }
 
 variable "rds_engine_version" {
-  type = string
+  type    = string
   default = "8.0.35"
 }
 
 variable "instance_class" {
-  type = string
+  type    = string
   default = "db.t3.micro"
 }
 
 variable "username" {
-  type = string
+  type    = string
   default = "ahmed"
 }
 
 variable "password" {
-  type = string
+  type    = string
   default = "password123"
 }
 
 variable "parameter_group_name" {
-  type = string
+  type    = string
   default = "default.mysql8.0"
 }
-  
+
 
 
 # Elastic Casche variables
 
 variable "cluster_id" {
-  type = string
+  type    = string
   default = "cluster"
 }
 
 variable "ec_engine" {
-  type = string
+  type    = string
   default = "redis"
 }
 
 variable "node_type" {
-  type = string
+  type    = string
   default = "cache.m4.large"
 }
 
 variable "ec_engine_version" {
-  type = string
+  type    = string
   default = "7.1"
 }
 

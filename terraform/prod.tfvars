@@ -15,20 +15,20 @@ aws_region = "us-east-1"
 
 
 # RDS VAlues
-db_name        = "mydb"
-rds_engine         = "mysql"
-rds_engine_version = "8.0.37"
-instance_class = "db.t3.micro"
-username       = "admin"
-password       = "password123"
+db_name              = "mydb"
+rds_engine           = "mysql"
+rds_engine_version   = "8.0.37"
+instance_class       = "db.t3.micro"
+username             = "admin"
+password             = "password123"
 parameter_group_name = "default.mysql8.0"
 
 
 # Elastic Cache
-cluster_id           = "cluster"
-ec_engine               = "redis"
-node_type            = "cache.m4.large"
-ec_engine_version       = "7.1"
+cluster_id        = "cluster"
+ec_engine         = "redis"
+node_type         = "cache.m4.large"
+ec_engine_version = "7.1"
 
 
 

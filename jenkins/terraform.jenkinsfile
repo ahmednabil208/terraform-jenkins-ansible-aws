@@ -1,0 +1,60 @@
+pipeline{
+    agent{
+        label 'bastion'
+    }
+    parameters {
+        choice(choices: ['apply', 'destroy'],name: 'TERAFORM_ACTION')
+
+    }
+
+    stages{
+
+        stage('checkout'){
+            steps{
+                git  url: 'https://github.com/ahmednabil208/terraform-jenkins-ansible-aws.git', branch: 'main'
+
+                sh 'ls'
+            }
+        }
+ 
+        stage('Terraform initialization'){
+            steps{
+                withCredentials([[
+                    $class: 'AmazonWebServicesCredentialsBinding',
+                    credentialsId: 'aws_credentials',
+                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY' ]]){
+                        sh 'cd terraform && terraform init'
+                    }
+            }
+        }
+
+         stage('validate') {
+            steps {
+                echo '#----------------Terraform Validate------------------#'
+                withCredentials([[
+                    $class: 'AmazonWebServicesCredentialsBinding',
+                    credentialsId: 'aws_credentials',
+                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY' ]]){
+
+                        sh 'cd terraform && terraform validate'
+                    }
+            }
+        }
+
+        stage('apply'){
+            steps{
+                withCredentials([[
+                    $class: 'AmazonWebServicesCredentialsBinding',
+                    credentialsId: 'aws_credentials',
+                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY' ]]){
+                        sh 'cd terraform && terraform workspace select prod'
+                        sh "cd terraform && terraform ${params.TERAFORM_ACTION} -var-file='prod.tfvars' -auto-approve"
+                    }
+            }
+            
+        }
+    }
+}

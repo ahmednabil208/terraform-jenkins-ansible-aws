@@ -87,9 +87,9 @@ resource "aws_vpc_security_group_ingress_rule" "rds_allow_http" {
 
 # Elastic cache security groups
 resource "aws_security_group" "elastic_cache_sg" {
-  name = "redis-sg"
-  vpc_id      = module.network.vpc_id
-  
+  name   = "redis-sg"
+  vpc_id = module.network.vpc_id
+
   ingress {
     from_port   = 6379
     to_port     = 6379
