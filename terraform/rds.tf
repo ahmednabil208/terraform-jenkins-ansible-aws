@@ -15,6 +15,7 @@ resource "aws_db_instance" "rds" {
   instance_class         = var.instance_class
   username               = var.username
   password               = var.password
+  allow_major_version_upgrade = true
   parameter_group_name   = var.parameter_group_name
   availability_zone      = "${var.aws_region}a"
   vpc_security_group_ids = [aws_security_group.rds_sg.id]
