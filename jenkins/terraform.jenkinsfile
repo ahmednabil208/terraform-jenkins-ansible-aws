@@ -1,7 +1,5 @@
 pipeline{
-    agent{
-        label 'bastion'
-    }
+    agent any
     parameters {
         choice(choices: ['apply', 'destroy'],name: 'TERAFORM_ACTION')
 
