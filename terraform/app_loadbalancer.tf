@@ -23,7 +23,7 @@ resource "aws_lb_target_group" "target_elb" {
 }
 
 # Target Attachment (application instance)
-resource "aws_lb_target_group_attachment" "app_attachment" {
+resource "aws_alb_target_group_attachment" "app_attachment" {
   target_group_arn = aws_lb_target_group.target_elb.arn
   target_id        = aws_instance.application.id
   port             = 3000
@@ -44,6 +44,11 @@ resource "aws_lb_listener" "listener_elb" {
 # Security Group
 locals {
   ingress_rules = [
+    {
+    name        = "HTTPS"
+    port        = 443
+    description = "Ingress rules for port 443"
+    },
     {
       name        = "HTTP"
       port        = 80
