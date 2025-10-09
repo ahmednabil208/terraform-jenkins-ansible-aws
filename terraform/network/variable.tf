@@ -6,6 +6,10 @@ variable "pub_cidr" {
   type    = string
 }
 
+variable "pub2_cidr" {
+  type    = string
+}
+
 variable "priv_cidr" {
   type    = string
 }

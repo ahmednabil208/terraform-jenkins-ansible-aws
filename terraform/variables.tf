@@ -8,6 +8,10 @@ variable "pub_cidr" {
   type    = string
 }
 
+variable "pub2_cidr" {
+  default = "10.0.4.0/24"
+}
+
 variable "priv_cidr" {
   default = "10.0.2.0/24"
   type    = string
