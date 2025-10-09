@@ -9,3 +9,5 @@ terraform/.terraform*
 terraform.tfstate
 
 steps.md
+
+.vscode
